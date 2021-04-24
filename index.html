@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./images/head.jpg">
     <title>今天又近了一天哟！</title>
     <style>
         * {
@@ -27,8 +28,6 @@
         .box1 {
             width: 100%;
             height: 555px;
-            background-color: pink;
-            margin: 0 auto;
             line-height: 100px;
             background: url(./images/4.jpg) no-repeat;
             background-size: 100%;
@@ -36,12 +35,28 @@
             font-size: 18px;
             font-weight: bold;
             color: #f86934;
-            text-align: center;
             position: relative;
+            text-align: center;
         }
         
         #time {
             width: 100%;
+            margin: 0 auto;
+        }
+        
+        #love {
+            position: absolute;
+            left: 37%;
+            top: 120px;
+            color: #fff;
+            line-height: 30px;
+            font-size: 20px;
+        }
+        
+        #love pre {
+            position: absolute;
+            right: 15px;
+            font-weight: 700;
         }
         
         #divclick {
@@ -51,7 +66,7 @@
             background-size: 30px;
             position: absolute;
             left: 20px;
-            top: 35px;
+            top: 15px;
         }
         
         #content {
@@ -71,79 +86,59 @@
 
 <body>
     <nav>
-        <p>我们的小窝</p>
+        <p>四周年</p>
+        </p>
     </nav>
     <div class="box1" id="box1">
         <div id="time"></div>
-        <div id="divclick"></div>
-        <div id="content" style="display: none;">
-            <p>
-                eat
-                <br /> 1.火锅 2.钵钵鸡 3.螺蛳粉<br />4.豆汤饭 5.炸土豆 6.关东煮<br /> 7.鸡爪煲 8.梅干菜扣肉饼 9.烤肉<br />10.火锅冒菜 11.炸鸡(烧酒) 12.卤肉卷 <br /> play
-                <br /> 1.春熙路 2.天府广场 3.逛学校 4.逛广场
-            </p>
-        </div>
+    </div>
+    <div id="love">
+        如果是去见宝宝,那我一定是跑着 <br /><pre>-猪猪</pre>
+    </div>
+    <div id="divclick"></div>
+
+    <div id="content" style="display: none;">
+        <p>
+            eat
+            <br /> 1.凉拌菜 2.鸡爪煲 3.炸土豆<br />4.卤肉卷 5.关东煮 6.花甲粉<br /> 7.豆汤饭 8.螺蛳粉 9.炒饭<br />10. 11. 12. <br /> play
+            <br /> 1.逛校园 2.动物园 3.春熙路 4.温泉(游泳)
+        </p>
+    </div>
     </div>
 
     <script>
-        window.onload = function() {
-            let get = document.getElementById("time");
-            let click = document.getElementById("divclick");
-            let content = document.getElementById("content")
-            let day = 0,
-                hour = 0,
-                minute = 0,
-                second = 0,
-                timeover = "";
-            click.onclick = function() {
-                if (content.style.display == "none")
-                    content.style.display = "block";
-                else
-                    content.style.display = "none";
-            };
+        let get = document.getElementById("time");
+        let click = document.getElementById("divclick");
+        let content = document.getElementById("content")
+        let day = 0,
+            hour = 0,
+            minute = 0,
+            second = 0,
+            nowTime = 0,
+            time = 0;
+        click.onclick = function() {
+            if (content.style.display == "none")
+                content.style.display = "block";
+            else
+                content.style.display = "none";
+        };
 
-            function gettime() {
-                let time = new Date();
-                let y = time.getFullYear();
-                let d = time.getDate();
-                let h = time.getHours();
-                let mi = time.getMinutes();
-                let s = time.getSeconds();
-                day = 0, hour = 0, minute = 0, second = 0, timeover = "";
-                if (y == 2020) {
-                    day = 31 - d + 4;
-                }
-                if (y == 2021) {
-                    day = 5 - day - 1;
-                    if (day < 10) {
-                        day = "0" + day;
-                    }
-                }
-                hour = 24 - h - 1;
-                minute = 60 - mi;
-                second = 60 - s;
-                if (hour == -1) {
-                    hour == 0;
-                }
-                if (hour < 10 && hour != 0) {
-                    hour = "0" + hour;
-                }
-                if (minute < 10 && minute != 0) {
-                    minute = "0" + minute;
-                }
-                if (second < 10 && second != 0) {
-                    second = "0" + second;
-                }
-
-                timeover = day + " 天 " + hour + " 时 " + minute + " 分 " + second + " 秒";
-                get.innerHTML = "倒计时：" + timeover;
-                time = null;
-            }
+        let wantTime = new Date("2021-5-3 14:30");
+        //获取时间的函数
+        function gettime() {
+            nowTime = new Date();
+            time = wantTime - nowTime;
+            time /= 1000;
+            day = parseInt(time / (24 * 60 * 60));
+            hour = parseInt(time / (60 * 60) % 24);
+            minute = parseInt(time / 60 % 60);
+            second = parseInt(time % 60);
+            get.innerText = `倒计时：${day}天${hour}时${minute}分${second}秒`
             setInterval(() => {
                 gettime();
             }, 1000);
-
         }
+        gettime();
     </script>
 </body>
 
