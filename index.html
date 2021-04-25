@@ -12,15 +12,47 @@
             margin: 0;
         }
         
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            overflow: hidden;
+        }
+        
+        span {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            background: url(./images/star.png) no-repeat;
+            background-size: 100% 100%;
+            animation: flash 1s alternate infinite;
+            position: absolute;
+        }
+        
+        @keyframes flash {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        span:hover {
+            transform: scale(3, 3) rotate(180deg) !important;
+            transition: all 1s;
+        }
+        
         nav {
             width: 100%;
             height: 50px;
             font-size: 20px;
             line-height: 50px;
             text-align: center;
-            background-color: #9b9fa1;
+            /* background-color: #9b9fa1; */
             color: #fff;
-            background: url(./images/img2.jpg) no-repeat;
+            /* background: url(./images/img2.jpg) no-repeat; */
             color: pink;
             font-weight: bold;
         }
@@ -29,9 +61,9 @@
             width: 100%;
             height: 555px;
             line-height: 100px;
-            background: url(./images/4.jpg) no-repeat;
+            /* background: url(./images/4.jpg) no-repeat; */
             background-size: 100%;
-            box-shadow: 1px 1px 20px 1px #333333;
+            /* box-shadow: 1px 1px 20px 1px #333333; */
             font-size: 18px;
             font-weight: bold;
             color: #f86934;
@@ -73,18 +105,18 @@
             position: absolute;
             width: 80%;
             line-height: 30px;
-            background-color: rgba(246, 213, 229, .5);
+            /* background-color: rgba(246, 213, 229, .5); */
             top: 100px;
             left: 10%;
             font-size: 16px;
             text-align: left;
             color: #fff;
-            color: #333333;
         }
     </style>
 </head>
 
 <body>
+    <span></span>
     <nav>
         <p>四周年</p>
         </p>
@@ -102,11 +134,33 @@
             eat
             <br /> 1.凉拌菜 2.鸡爪煲 3.炸土豆<br />4.卤肉卷 5.关东煮 6.花甲粉<br /> 7.豆汤饭 8.螺蛳粉 9.炒饭<br />10. 11. 12. <br /> play
             <br /> 1.逛校园 2.动物园 3.春熙路 4.温泉(游泳)
-        </p>
+        </p> -->
     </div>
     </div>
 
     <script>
+        //星空背景开始
+
+        //获取可见区域大小
+        let width = innerWidth;
+        let height = innerHeight;
+        // 创建小星星
+        for (let i = 0; i < 200; i++) {
+            let oSpan = document.createElement("span");
+            document.body.appendChild(oSpan);
+            //随机位置
+            let x = Math.random() * width;
+            let y = Math.random() * height;
+            oSpan.style.left = x + "px";
+            oSpan.style.top = y + "px";
+            //随机小星星大小
+            let scale = Math.random() * 2;
+            oSpan.style.transform = `scale(${scale}, ${scale})`
+                //随机显示隐藏动画
+            let time = Math.random() * 2;
+            oSpan.style.animationDelay = time + "s";
+        }
+        // 星空背景结束
         let get = document.getElementById("time");
         let click = document.getElementById("divclick");
         let content = document.getElementById("content")
